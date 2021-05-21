@@ -9,14 +9,13 @@ import java.io.IOException;
 /**
  * 主题生产者
  */
-public class TestTopicConsumer {
+public class TestTopicConsumer2 {
 
     private static String brokerURL = "tcp//127.0.0.1:61616";
 
     private static String topicName = "topicName_demo";
 
-    private static String singleTarget = "zhangsan";
-
+    private static String singleTarget = "lisi";
 
     public static void main(String[] args) throws JMSException, IOException {
 
@@ -36,7 +35,7 @@ public class TestTopicConsumer {
 
         //持久状态订阅者
         TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic,singleTarget);
-        System.out.println("1号订阅者启动....");
+        System.out.println("2号订阅者启动....");
 
         topicSubscriber.setMessageListener(new MessageListener() {
             @SneakyThrows

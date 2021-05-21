@@ -21,16 +21,18 @@ public class TestProducerAsync {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
         //5.创建目标对象
         Queue queue = session.createQueue("queueName");
+        //6.创建Producter
+        MessageProducer producer = session.createProducer(queue);
         for(int i=1;i<=10;i++){
-            //6.创建Producter
-            MessageProducer producer = session.createProducer(queue);
+
             //7.创建消息内容
             TextMessage textMessage = session.createTextMessage("为你写诗为你静止"+i);
             //8.发送消息
             producer.send(textMessage);
-            producer.close();
         }
         //9.关闭链接
+        producer.close();
+
         session.close();
         connection.close();
         System.out.println("消息发送成功........");
