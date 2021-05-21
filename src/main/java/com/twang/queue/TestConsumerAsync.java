@@ -17,7 +17,8 @@ public class TestConsumerAsync {
     public static void main(String[] args) throws JMSException, IOException {
 
         //1.创建ConnectionFactory
-        ConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
+        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
+        factory.setTrustAllPackages(true);
         //2.创建Connection
         Connection connection = factory.createConnection();
         //3.开启链接
@@ -33,10 +34,15 @@ public class TestConsumerAsync {
             @SneakyThrows
             @Override
             public void onMessage(Message message) {
-
                 if(message instanceof TextMessage){
                     TextMessage textMessage = (TextMessage) message;
                     System.out.println(textMessage.getText());
+                }if(message instanceof MapMessage ){
+                    MapMessage mapMessage = (MapMessage) message;
+                    System.out.println( mapMessage.getString("123")+"---"+mapMessage.getStringProperty("name"));
+                }if(message instanceof ObjectMessage){
+                    ObjectMessage objectMessage = (ObjectMessage) message;
+                    System.out.println(objectMessage.getObject().toString());
                 }
             }
         });
