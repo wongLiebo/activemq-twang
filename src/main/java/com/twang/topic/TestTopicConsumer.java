@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class TestTopicConsumer {
 
-    private static String brokerURL = "tcp//127.0.0.1:61616";
+    private static String brokerURL = "tcp://127.0.0.1:6262";
 
     private static String topicName = "topicName_demo";
 
@@ -20,7 +20,7 @@ public class TestTopicConsumer {
 
     public static void main(String[] args) throws JMSException, IOException {
 
-        ConnectionFactory factory = new ActiveMQConnectionFactory();
+        ConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
 
         Connection connection = factory.createConnection();
 

@@ -9,13 +9,13 @@ import javax.jms.*;
  */
 public class TestTopicProducer {
 
-    private static String brokerURL = "tcp//127.0.0.1:61616";
+    private static String brokerURL = "tcp://127.0.0.1:6262";
 
     private static String topicName = "topicName_demo";
 
     public static void main(String[] args) throws JMSException {
 
-        ConnectionFactory factory = new ActiveMQConnectionFactory();
+        ConnectionFactory factory = new ActiveMQConnectionFactory(brokerURL);
 
         Connection connection = factory.createConnection();
 
